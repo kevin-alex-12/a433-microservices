@@ -1,0 +1,26 @@
+# Ambil versi docker compose 3.7
+version: "3.7"
+
+services:
+
+  # Service item-app
+  item-app:
+    image: anickme/item-app:v1
+    depends_on:
+    - item-db
+    restart: always
+    ports:
+    - 80:8080
+  
+  # Service item-db
+  item-db:
+    image: mongo:3
+    restart: always
+    ports:
+    - 8081:8081
+    volumes:
+    - app-db:/data/db
+
+# Buat volume untuk item-db
+volumes:
+  app-db:
